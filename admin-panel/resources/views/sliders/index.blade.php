@@ -30,8 +30,12 @@
                                     <td class="dir-ltr">{{ $slider->link_address }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="{{ route('slider.edit', ['slider' => $slider->id]) }}" class="btn btn-sm btn-outline-info me-2">ویرایش</a>
-                                            <button class="btn btn-sm btn-danger">حذف</button>
+                                            <a href="{{ route('slider.edit', ['slider' => $slider->id]) }}" style="height:32px;" class="btn btn-sm btn-outline-info me-2" >ویرایش</a>
+                                            <form method="POST" action="{{ route('slider.destroy' , ['slider' => $slider->id]) }}">
+                                                @csrf
+                                                @method("DELETE")
+                                                <button class="btn btn-sm btn-danger">حذف</button>
+                                            </form>
                                         </div>
                                     </td>
 

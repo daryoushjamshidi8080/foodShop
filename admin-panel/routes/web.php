@@ -14,5 +14,5 @@ Route::group(['prefix' => 'sliders'], function() {
     Route::post('/', [SliderController::class, 'store'])->name('slider.store');
     Route::get('/{slider}/edit', [SliderController::class , 'edit'])->name('slider.edit');
     Route::put('/{slider}', [SliderController::class , 'update'])->name('slider.update');
-
+    Route::delete('/{slider}', [SliderController::class, 'destroy'])->name('slider.destroy');
 });
