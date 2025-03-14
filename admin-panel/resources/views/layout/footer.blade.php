@@ -24,18 +24,24 @@
     @if (session('success'))
         <script>
             Toast.fire({
-            icon: "success",
-            title: "{{ session('success') }}"
+                icon: "success",
+                title: "{{ session('success') }}"
             });
         </script>
     @elseif(session('error'))
         <script>
             Toast.fire({
-            icon: "error",
-            title: "{{ session('error') }}"
+                icon: "error",
+                title: "{{ session('error') }}"
             });
         </script>
-
+    @elseif(session('warning'))
+        <script>
+            Toast.fire({
+                icon: "warning",
+                title: "{{ session('warning') }}"
+            });
+        </script>
     @endif
 
 
