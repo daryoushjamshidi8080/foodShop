@@ -24,8 +24,8 @@
                             @foreach( $features as $feature)
                                 <tr>
                                     <td>{{ $feature->title }}</td>
-                                    <td>{{ $feature->body }}</td>
-                                    <td>{{ $feature->icone }}</td>
+                                    <td>{{ Str::limit($feature->body, 60, '...') }}</td>
+                                    <td>{{ $feature->icon }}</td>
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{ route('feature.edit', ['feature' => $feature->id]) }}" style="height:32px;" class="btn btn-sm btn-outline-info me-2" >ویرایش</a>

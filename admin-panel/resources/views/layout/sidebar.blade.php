@@ -45,23 +45,23 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown-center">
-                        <a class="nav-link dropdown-toggle {{ request()->is('sliders*') || request()->is('feature*') ? 'active' : '' }}"
+                        <a class="nav-link dropdown-toggle {{ request()->is('sliders*') || request()->is('about-us*') || request()->is('feature*') ? 'active' : '' }}"
                         href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-gear  me-2"></i>
                             تنظیمات سایت
                         </a>
                         <ul class="dropdown-menu sidebar-menu">
                             <li>
-                                <a class="dropdown-item" href="{{ route('slider.index') }}">اسلایدر صفحه اصلی</a>
+                                <a class="dropdown-item {{ request()->is('sliders') ? 'active' : '' }}" href="{{ route('slider.index') }}">اسلایدر صفحه اصلی</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="{{ route('feature.index') }}">بخش ویژگی ها</a>
+                                <a class="dropdown-item {{ request()->is('features') ? 'active' : '' }}" href="{{ route('feature.index') }}">بخش ویژگی ها</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">بخش درباره ما</a>
+                                <a class="dropdown-item {{ request()->is('about-us') ? 'active' : '' }}" href="{{ route('about.index') }}">بخش درباره ما</a>
                             </li>
                             <li>
-                                <a class="dropdown-item" href="#">بخش فوتر</a>
+                                <a class="dropdown-item {{ request()->is('') ? 'active' : '' }}" href="#">بخش فوتر</a>
                             </li>
                         </ul>
                     </li>

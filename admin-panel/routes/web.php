@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\FeatureController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -27,3 +28,11 @@ Route::group(['prefix' => 'features'], function() {
     Route::put('/{feature}', [FeatureController::class , 'update'])->name('feature.update');
     Route::delete('/{feature}', [FeatureController::class, 'destroy'])->name('feature.destroy');
 });
+
+
+Route::group(['prefix' => 'about-us'], function() {
+    Route::get('/', [AboutUsController::class, 'index'])->name('about.index');
+    Route::get('/{about}/edit', [AboutUsController::class , 'edit'])->name('about.edit');
+    Route::put('/{about}', [AboutUsController::class , 'update'])->name('about.update');
+});
+
