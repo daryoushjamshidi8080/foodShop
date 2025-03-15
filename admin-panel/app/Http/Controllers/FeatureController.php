@@ -36,7 +36,7 @@ class FeatureController extends Controller
             'icon' => $request->icon
         ]);
 
-        return redirect()->route('features.index')->with('success', 'اسلایدر با موفقیت ایجاد شد');
+        return redirect()->route('feature.index')->with('success', 'ویژگی  با موفقیت ایجاد شد');
     }
 
 
@@ -70,6 +70,6 @@ class FeatureController extends Controller
     public function destroy(Feature $feature)
     {
         $feature->delete();
-        return redirect()->route('feature.index')->with('warning', 'اسلایدر با موفقیت حذف شد');
+        return redirect()->route('feature.index')->with('warning', 'ویژگی با موفقیت حذف شد');
     }
 }
