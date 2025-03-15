@@ -77,8 +77,5 @@ class SliderController extends Controller
     {
         $slider->delete();
         return redirect()->route('slider.index')->with('warning', 'اسلایدر با موفقیت حذف شد');
-
-
-
     }
 }
