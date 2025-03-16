@@ -23,12 +23,15 @@ class ContactUsController extends Controller
             'body' => 'required'
         ]);
 
-        ContactUs::created([
+
+
+        ContactUs::create([
             'name' => $request->name,
             'email' => $request->email,
             'subject' => $request->subject,
             'body' => $request->body
         ]);
+
 
         return redirect()->back()->with('success', 'پیام شما با موفقیت ثبت شد');
     }

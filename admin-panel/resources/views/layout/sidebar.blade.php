@@ -44,6 +44,12 @@
                             تخفیف ها
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a  class="nav-link {{ request()->is('contact*') ? 'active' : '' }}"  href="{{ route('contact.index') }}">
+                            <i class="bi bi-chat-left-text me-2"></i>
+                            پیام های ارتباط با ما
+                        </a>
+                    </li>
                     <li class="nav-item dropdown-center">
                         <a class="nav-link dropdown-toggle {{ request()->is('sliders*') || request()->is('about-us*') || request()->is('feature*') ? 'active' : '' }}"
                         href="#" role="button" data-bs-toggle="dropdown">

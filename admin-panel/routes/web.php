@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\FeatureController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -36,3 +37,10 @@ Route::group(['prefix' => 'about-us'], function() {
     Route::put('/{about}', [AboutUsController::class , 'update'])->name('about.update');
 });
 
+
+
+Route::group(['prefix' => 'contact'], function() {
+    Route::get('/', [ContactUsController::class, 'index'])->name('contact.index');
+    Route::get('/{message}', [ContactUsController::class , 'show'])->name('contact.show');
+    Route::delete('/{message}', [ContactUsController::class , 'destroy'])->name('contact.destroy');
+});
