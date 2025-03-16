@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     <li class="nav-item dropdown-center">
-                        <a class="nav-link dropdown-toggle {{ request()->is('sliders*') || request()->is('about-us*') || request()->is('feature*') ? 'active' : '' }}"
+                        <a class="nav-link dropdown-toggle {{ request()->is('sliders*') || request()->is('footer*') || request()->is('about-us*') || request()->is('feature*') ? 'active' : '' }}"
                         href="#" role="button" data-bs-toggle="dropdown">
                             <i class="bi bi-gear  me-2"></i>
                             تنظیمات سایت
@@ -67,7 +67,7 @@
                                 <a class="dropdown-item {{ request()->is('about-us') ? 'active' : '' }}" href="{{ route('about.index') }}">بخش درباره ما</a>
                             </li>
                             <li>
-                                <a class="dropdown-item {{ request()->is('') ? 'active' : '' }}" href="#">بخش فوتر</a>
+                                <a class="dropdown-item {{ request()->is('footer') ? 'active' : '' }}" href="{{ route('footer.index') }}">بخش فوتر</a>
                             </li>
                         </ul>
                     </li>

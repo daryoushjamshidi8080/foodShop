@@ -3,6 +3,7 @@
 use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\FeatureController;
+use App\Http\Controllers\FooterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SliderController;
@@ -43,4 +44,13 @@ Route::group(['prefix' => 'contact'], function() {
     Route::get('/', [ContactUsController::class, 'index'])->name('contact.index');
     Route::get('/{message}', [ContactUsController::class , 'show'])->name('contact.show');
     Route::delete('/{message}', [ContactUsController::class , 'destroy'])->name('contact.destroy');
+});
+
+
+
+
+Route::group(['prefix' => 'footer'], function() {
+    Route::get('/', [FooterController::class, 'index'])->name('footer.index');
+    Route::get('/{footer}/edit', [FooterController::class, 'edit'])->name('footer.edit');
+    Route::put('/{footer}', [FooterController::class , 'update'])->name('footer.update');
 });
