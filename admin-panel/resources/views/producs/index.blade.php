@@ -15,84 +15,46 @@
                             <tr>
                                 <th>تصویر</th>
                                 <th>نام</th>
+                                <th>دسته بندی</th>
                                 <th>قیمت</th>
                                 <th>تعداد</th>
                                 <th>وضعیت</th>
                                 <th>عملیات</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>
-                                    <img src="./images/b1.jpg" width="80" alt="">
-                                </th>
-                                <td>همبر ذغالی</td>
-                                <td>89,000</td>
-                                <td>15</td>
-                                <td>فعال</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-info me-2">نمایش</button>
-                                        <button class="btn btn-sm btn-danger">حذف</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <img src="./images/p1.jpg" width="80" alt="">
-                                </th>
-                                <td>پیتزا متخصص</td>
-                                <td>150,000</td>
-                                <td>5</td>
-                                <td>فعال</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-info me-2">نمایش</button>
-                                        <button class="btn btn-sm btn-danger">حذف</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <img src="./images/b2.jpg" width="80" alt="">
-                                </th>
-                                <td>همبر ذعالی بوقلمون</td>
-                                <td>103,000</td>
-                                <td>10</td>
-                                <td>فعال</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-info me-2">نمایش</button>
-                                        <button class="btn btn-sm btn-danger">حذف</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    <img src="./images/p2.jpg" width="80" alt="">
-                                </th>
-                                <td>پیتزا رست بیف</td>
-                                <td>193,000</td>
-                                <td>8</td>
-                                <td>فعال</td>
-                                <td>
-                                    <div class="d-flex">
-                                        <button class="btn btn-sm btn-outline-info me-2">نمایش</button>
-                                        <button class="btn btn-sm btn-danger">حذف</button>
-                                    </div>
-                                </td>
-                            </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($products as $product)
+                                <tr>
+                                    <th>
+                                        <img src="{{ asset('images/products/' . $product->primary_image ) }}" width="80" alt="">
+                                    </th>
+                                    <td>{{ $product->name }}</td>
+                                    <td>{{ $product->category->name }}</td>
+                                    <td>{{ number_format($product->price) }}</td>
+                                    <td>{{ $product->quantity }}</td>
+                                    <td>{{ $product->status == '1' ? 'فعال' : 'غیرفعال' }}</td>
+                                    <td>
+                                        <div class="d-flex">
+                                            <a style="height:32px;" href="{{ route('product.show' , ['product' => $product->id]) }}"  class="btn btn-sm btn-outline-info me-2">نمایش</a>
+                                            <a style="height:32px;" href="{{ route('product.edit', ['product' => $product->id]) }}" class="btn btn-sm btn-outline-primary me-2">ویرایش</a>
+                                            <form method="POST" class="inline-block " action="{{ route('product.destroy' , ['product' => $product->id ])  }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-sm btn-danger">حذف</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
 
+
+
                 <div class="d-flex justify-content-center mt-4">
                     <nav aria-label="navigation">
-                        <ul class="pagination">
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        </ul>
+                        {{ $products->links('layout.paginate') }}
                     </nav>
                 </div>
         </div>
