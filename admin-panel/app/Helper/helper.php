@@ -84,5 +84,12 @@ function slugify($str, $delimiter = '-', $lowercase = true, $limit = null, $opti
 
 function getMiladiDate($data)
 {
-    return Verta::parse($data)->formatGregorian('Y-n-j H:i');
+    return Verta::parse($data)->formatGregorian('Y-n-j H:i:s');
+}
+
+
+
+function getShamsiDate($data)
+{
+    return verta($data)->format('Y/m/j H:i:s');
 }
