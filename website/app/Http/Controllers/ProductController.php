@@ -14,4 +14,12 @@ class ProductController extends Controller
         $randomProduct = Product::where('quantity', '>', 0)->where('status', 1)->get()->random(4);
         return view('products.show', compact('product', 'randomProduct'));
     }
+
+
+
+    public function menu()
+    {
+        $products = Product::all();
+        return view('products.menu', compact('products'));
+    }
 }
