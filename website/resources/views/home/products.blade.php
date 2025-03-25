@@ -1,9 +1,9 @@
 @php
 use App\Models\Product;
 
-$bergers = Product::where('category_id' , 9)->take(3)->get();
-$pizzas = Product::where('category_id' , 10)->take(3)->get();
-$salads = Product::where('category_id' , 11)->take(3)->get();
+$bergers = Product::where('category_id' , 9)->take(3)->where('quantity', '>', 0)->where('status', '1')->get();
+$pizzas = Product::where('category_id' , 10)->take(3)->where('quantity', '>', 0)->where('status', '1')->get();
+$salads = Product::where('category_id' , 11)->take(3)->where('quantity', '>', 0)->where('status', '1')->get();
 
 @endphp
 
@@ -36,7 +36,9 @@ $salads = Product::where('category_id' , 11)->take(3)->get();
                                 </div>
                                 <div class="detail-box">
                                     <h5>
-                                        {{ $berger->name }}
+                                        <a href="{{ route('product.show', ['product' => $berger->slug]) }}">
+                                            {{ $berger->name }}
+                                        </a>
                                     </h5>
                                     <p>
                                         {{ $berger->description }}
@@ -88,7 +90,10 @@ $salads = Product::where('category_id' , 11)->take(3)->get();
                                 </div>
                                 <div class="detail-box">
                                     <h5>
-                                        {{ $pizza->name }}
+                                        <a href="{{ route('product.show', ['product' => $berger->slug]) }}">
+                                            {{ $pizza->name }}
+                                        </a>
+
                                     </h5>
                                     <p>
                                         {{ $pizza->description }}
@@ -140,7 +145,10 @@ $salads = Product::where('category_id' , 11)->take(3)->get();
                                 </div>
                                 <div class="detail-box">
                                     <h5>
-                                        {{ $salad->name }}
+                                        <a href="{{ route('product.show', ['product' => $berger->slug]) }}">
+                                            {{ $salad->name }}
+                                        </a>
+
                                     </h5>
                                     <p>
                                         {{ $salad->description }}
