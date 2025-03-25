@@ -17,6 +17,7 @@ class ProductController extends Controller
         $slug = slugify($string);
         $count = Product::withTrashed()->whereRaw("slug ~ '^{$slug}(-[0-9]+)?$'")->count();
         $result = $count ? $slug . '-' . $count : $slug;
+        // dd($result);
         return $result;
     }
 

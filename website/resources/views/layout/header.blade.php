@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
@@ -31,7 +30,7 @@
                     <nav class="navbar navbar-expand-lg custom_nav-container">
                         <a class="navbar-brand" href="index.html">
                             <span>
-                                webprog.io
+                                daryoush
                             </span>
                         </a>
 
@@ -74,50 +73,50 @@
             <!-- end header section -->
             @if(request()->is('/'))
 
-                @include('home.slider')
+            @include('home.slider')
 
             @endif
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 10000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+                crossorigin="anonymous">
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+            <script>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 10000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
                 });
-    </script>
+            </script>
 
 
-        @if (session('success'))
+            @if (session('success'))
             <script>
                 Toast.fire({
                     icon: "success",
                     title: "{{ session('success') }}"
                 });
             </script>
-        @elseif(session('error'))
+            @elseif(session('error'))
             <script>
                 Toast.fire({
                     icon: "error",
                     title: "{{ session('error') }}"
                 });
             </script>
-        @elseif(session('warning'))
+            @elseif(session('warning'))
             <script>
                 Toast.fire({
                     icon: "warning",
                     title: "{{ session('warning') }}"
                 });
             </script>
-        @endif
+            @endif
         </div>
     </div>
