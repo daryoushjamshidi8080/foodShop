@@ -19,7 +19,7 @@ class ProductController extends Controller
 
     public function menu()
     {
-        $products = Product::all();
+        $products = Product::paginate(6);
         return view('products.menu', compact('products'));
     }
 }

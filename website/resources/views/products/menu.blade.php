@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'product')
+@section('title', 'منو')
 
 @section('content')
 
@@ -62,103 +62,43 @@
 
             <div class="col-sm-12 col-lg-9">
                 <div class="row gx-3">
+
+                    @foreach($products as $product)
                     <div class="col-sm-6 col-lg-4">
                         <div class="box">
                             <div>
                                 <div class="img-box">
-                                    <img class="img-fluid" src="./images/b1.jpg" alt="" />
+                                    <img class="img-fluid" src="{{ imageUrl($product->primary_image) }}" alt="" />
                                 </div>
                                 <div class="detail-box">
                                     <h5>
-                                        برگر مخصوص
+                                        <a href="{{ route('product.show', ['product' => $product->slug]) }}">
+                                            {{ $product->name }}
+                                        </a>
                                     </h5>
                                     <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
+                                        {{ $product->description }}
                                     </p>
                                     <div class="options">
+                                        @if($product->is_sale)
                                         <h6>
-                                            <del>95,000</del>
+                                            <del>{{ number_format($product->price) }}</del>
                                             <span>
-                                                <span class="text-danger">(16%)</span>
-                                                80,000
+                                                <span class="text-danger">(%{{ calculateDiscount((int)$product->price, (int)$product->sale_price) }})</span>
+                                                {{ number_format($product->sale_price) }}
                                                 <span>تومان</span>
                                             </span>
                                         </h6>
-                                        <div class="d-flex">
-                                            <a class="me-2" href="">
-                                                <i class="bi bi-cart-fill text-white fs-6"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="bi bi-heart-fill  text-white fs-6"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img class="img-fluid" src="./images/p3.jpg" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        پیتزا سرآشپز
-                                    </h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
-                                    </p>
-                                    <div class="options">
+                                        @else
+
                                         <h6>
-                                            300,000
-                                            <span>تومان</span>
-                                        </h6>
-                                        <div class="d-flex">
-                                            <a class="me-2" href="">
-                                                <i class="bi bi-cart-fill text-white fs-6"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="bi bi-heart-fill  text-white fs-6"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img class="img-fluid" src="./images/p1.jpg" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        پیتزا مخصوص خانواده
-                                    </h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            <del>450,000</del>
                                             <span>
-                                                <span class="text-danger">(20%)</span>
-                                                360,000
+                                                {{ number_format($product->price) }}
                                                 <span>تومان</span>
                                             </span>
                                         </h6>
+
+                                        @endif
                                         <div class="d-flex">
                                             <a class="me-2" href="">
                                                 <i class="bi bi-cart-fill text-white fs-6"></i>
@@ -172,216 +112,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img class="img-fluid" src="./images/b2.jpg" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        چیز برگر
-                                    </h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            110,000
-                                            <span>تومان</span>
-                                        </h6>
-                                        <div class="d-flex">
-                                            <a class="me-2" href="">
-                                                <i class="bi bi-cart-fill text-white fs-6"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="bi bi-heart-fill  text-white fs-6"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img class="img-fluid" src="./images/s1.jpg" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        سالاد فصل
-                                    </h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            34,000
-                                            <span>تومان</span>
-                                        </h6>
-                                        <div class="d-flex">
-                                            <a class="me-2" href="">
-                                                <i class="bi bi-cart-fill text-white fs-6"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="bi bi-heart-fill  text-white fs-6"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img class="img-fluid" src="./images/d2.jpg" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        نوشابه قوطی
-                                    </h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            20,000
-                                            <span>تومان</span>
-                                        </h6>
-                                        <div class="d-flex">
-                                            <a class="me-2" href="">
-                                                <i class="bi bi-cart-fill text-white fs-6"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="bi bi-heart-fill  text-white fs-6"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img class="img-fluid" src="./images/s2.jpg" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        سالاد کلم
-                                    </h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            44,000
-                                            <span>تومان</span>
-                                        </h6>
-                                        <div class="d-flex">
-                                            <a class="me-2" href="">
-                                                <i class="bi bi-cart-fill text-white fs-6"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="bi bi-heart-fill  text-white fs-6"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img class="img-fluid" src="./images/b3.jpg" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        رویال برگر
-                                    </h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            121,000
-                                            <span>تومان</span>
-                                        </h6>
-                                        <div class="d-flex">
-                                            <a class="me-2" href="">
-                                                <i class="bi bi-cart-fill text-white fs-6"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="bi bi-heart-fill  text-white fs-6"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img class="img-fluid" src="./images/p3.jpg" alt="" />
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        پیتزا مخصوص 1 نفره
-                                    </h5>
-                                    <p>
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                                        از
-                                        طراحان
-                                        گرافیک است.
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            200,000
-                                            <span>تومان</span>
-                                        </h6>
-                                        <div class="d-flex">
-                                            <a class="me-2" href="">
-                                                <i class="bi bi-cart-fill text-white fs-6"></i>
-                                            </a>
-                                            <a href="">
-                                                <i class="bi bi-heart-fill  text-white fs-6"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
+
+
                 </div>
                 <nav class="d-flex justify-content-center mt-5">
                     <ul class="pagination">
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        {{ $products->links('layout.paginate') }}
                     </ul>
                 </nav>
             </div>
