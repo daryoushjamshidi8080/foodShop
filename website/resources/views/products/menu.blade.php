@@ -37,7 +37,11 @@
         <div class="row">
             <div x-data="filter" class="col-sm-12 col-lg-3">
                 <div>
-                    <label class="form-label">جستجو</label>
+                    <label class="form-label">جستجو
+                        @if(request()->has('search'))
+                        <i @click="removeFliter('search')" class="bi bi-x text-danger fs-5 cursor-pointer"></i>
+                        @endif
+                    </label>
                     <div class="input-group mb-3">
                         <input type="text" x-model="search" class="form-control" placeholder="نام محصول ..." />
                         <button @click="filter('search', search)" class="input-group-text">

@@ -103,6 +103,12 @@
                 filter(type, value) {
                     this.params.set(type, value);
                     document.location.href = this.currentUrl + '?' + this.params.toString();
+                },
+
+                removeFliter(type) {
+                    this.params.delete(type);
+                    document.location.href = this.currentUrl + '?' + this.params.toString();
+
                 }
             }))
         });
