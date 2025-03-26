@@ -150,7 +150,7 @@
                 </div>
                 <nav class="d-flex justify-content-center mt-5">
                     <ul class="pagination">
-                        {{ $products->links('layout.paginate') }}
+                        {{ $products->withQueryString()->links('layout.paginate') }}
                     </ul>
                 </nav>
             </div>
