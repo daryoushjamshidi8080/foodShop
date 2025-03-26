@@ -1,6 +1,33 @@
 @extends('layout.master')
 @section('title', 'منو')
 
+@section('script')
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+@endsection
+
+@section('script')
+<script type="text/javascript">
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('imageViewer', () => ({
+            imageUrl: '',
+
+            fileChosen(event) {
+                if (event.target.files.length == 0) return;
+
+                let file = event.target.files[0];
+                let reader = new FileReader()
+
+                reader.readAsDataURL(file)
+                reader.onload = e => this.imageUrl = e.target.result
+            }
+        }))
+    });
+
+    jalaliDatepicker.startWatch({
+        time: true
+    });
+</script>
+@endsection
 @section('content')
 
 <!-- food section -->
@@ -8,12 +35,12 @@
 <section class="food_section layout_padding">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12 col-lg-3">
+            <div x-data="filter" class="col-sm-12 col-lg-3">
                 <div>
                     <label class="form-label">جستجو</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="نام محصول ..." />
-                        <button class="input-group-text">
+                        <input type="text" x-model="search" class="form-control" placeholder="نام محصول ..." />
+                        <button @click="filter('search', search)" class="input-group-text">
                             <i class="bi bi-search"></i>
                         </button>
                     </div>
@@ -62,6 +89,11 @@
 
             <div class="col-sm-12 col-lg-9">
                 <div class="row gx-3">
+                    @if($products->isEmpty())
+                    <div class="d-flex justify-content-center align-items-center h-100">
+                        <h5>محصولی یافت نشد</h5>
+                    </div>
+                    @endif
 
                     @foreach($products as $product)
                     <div class="col-sm-6 col-lg-4">

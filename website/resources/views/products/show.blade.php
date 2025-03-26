@@ -1,5 +1,7 @@
 @extends('layout.master')
-@section('title', 'product')
+@section('title', 'Menu page')
+
+
 
 @section('content')
 

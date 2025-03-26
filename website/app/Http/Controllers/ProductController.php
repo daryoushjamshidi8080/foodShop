@@ -17,9 +17,9 @@ class ProductController extends Controller
 
 
 
-    public function menu()
+    public function menu(Request $request)
     {
-        $products = Product::paginate(6);
+        $products = Product::search($request->query('search'))->paginate(9);
         return view('products.menu', compact('products'));
     }
 }

@@ -26,4 +26,10 @@ class Product extends Model
     {
         return $this->hasMany(ProductImage::class, 'products_id');
     }
+
+
+    public function scopeSearch($query, $search)
+    {
+        $query->where('name', 'LIKE', '%' . trim($search) . '%')->orWhere('description', 'LIKE', '%' . trim($search) . '%');
+    }
 }

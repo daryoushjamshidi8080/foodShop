@@ -11,5 +11,5 @@ class ProductImage extends Model
     use SoftDeletes;
 
     protected $table = 'product_images';
-    // protected $guarded = [];
+    protected $guarded = [];
 }
