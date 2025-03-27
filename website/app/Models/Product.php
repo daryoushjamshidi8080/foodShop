@@ -21,6 +21,11 @@ class Product extends Model
     }
 
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 
     public function images()
     {
@@ -31,5 +36,46 @@ class Product extends Model
     public function scopeSearch($query, $search)
     {
         $query->where('name', 'LIKE', '%' . trim($search) . '%')->orWhere('description', 'LIKE', '%' . trim($search) . '%');
+    }
+
+    //public function scopeCategory($query, $categoryName)
+    // {
+
+    //     if ($categoryName) {
+    //         return $query->whereHas('category', function ($q) use ($categoryName) {
+    //             $q->where('name', $categoryName);
+    //         });
+    //     }
+
+    //     return $query;
+    // }
+
+
+    public function scopeFilter($query)
+    {
+        if (request()->has('category')) {
+            $query->where('category_id', request()->query('category'));
+        };
+
+        if (request()->has('sortBy')) {
+            switch (request()->query('sortBy')) {
+                case 'max':
+                    $query->orderBy('price', 'desc');
+                    break;
+                case 'min':
+                    $query->orderBy('price');
+                    break;
+                case 'bestsaller':
+                    $query;
+                    break;
+                case 'sale':
+                    $query->where('sale_price', '!=', 0)->where('date_on_sale_to', '>=', Carbon::now())->where('date_on_sale_from', '<=', Carbon::now());
+                    break;
+                default:
+                    $query;
+                    break;
+            }
+            // return $query;
+        }
     }
 }

@@ -97,19 +97,21 @@
             Alpine.data('filter', () => ({
                 search: '',
                 currentUrl: '{{ url()->current() }}',
-                params: new URLSearchParams(),
+                params: new URLSearchParams(location.search),
 
 
                 filter(type, value) {
                     this.params.set(type, value);
+                    this.params.delete('page');
                     document.location.href = this.currentUrl + '?' + this.params.toString();
                 },
 
                 removeFliter(type) {
                     this.params.delete(type);
+                    this.params.delete('page')
                     document.location.href = this.currentUrl + '?' + this.params.toString();
+                },
 
-                }
             }))
         });
 

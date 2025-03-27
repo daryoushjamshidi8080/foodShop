@@ -53,37 +53,50 @@
                 <div class="filter-list">
                     <div class="form-label">
                         دسته بندی
+
+                        @if (request()->query('category'))
+                        <i @click="removeFliter('category')" class="bi bi-x text-danger fs-5 cursor-pointer"></i>
+                        @endif
                     </div>
                     <ul>
-                        <li class="my-2 cursor-pointer filter-list-active">پیتزا</li>
-                        <li class="my-2 cursor-pointer">برگر</li>
-                        <li class="my-2 cursor-pointer">پیش غذا و سالاد</li>
-                        <li class="my-2 cursor-pointer">نوشیدنی</li>
+                        @foreach($categories as $category)
+                        <li @click="filter('category','{{ $category->id }}')" class="cursor-pointer my-2
+                        {{ request()->has('category') &&  request()->category == $category->id  ? 'filter-list-active' : ''}}
+                        ">
+                            {{ $category->name }}
+                        </li>
+                        @endforeach
+
                     </ul>
                 </div>
                 <hr />
                 <div>
-                    <label class="form-label">مرتب سازی</label>
+                    <label class=" form-label">مرتب سازی
+                        @if(request()->has('sortBy'))
+                        <i @click="removeFliter('sortBy')" class="bi bi-x text-danger fs-5 cursor-pointer"></i>
+                        @endif
+
+                    </label>
                     <div class="form-check my-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" />
+                        <input @change="filter('sortBy', 'max')" class="form-check-input" type="radio" name="flexRadioDefault" {{ request()->has('sortBy') && request()->query('sortBy') == 'max' ? 'checked' : '' }} />
                         <label class="form-check-label cursor-pointer">
                             بیشترین قیمت
                         </label>
                     </div>
                     <div class="form-check my-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" checked />
+                        <input @change="filter('sortBy', 'min')" class="form-check-input" type="radio" name="flexRadioDefault" {{ request()->has('sortBy') && request()->query('sortBy') == 'min' ? 'checked' : '' }} />
                         <label class="form-check-label cursor-pointer">
                             کمترین قیمت
                         </label>
                     </div>
                     <div class="form-check my-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" />
+                        <input @change="filter('sortBy', 'bestsaller')" class="form-check-input" type="radio" name="flexRadioDefault" {{ request()->has('sortBy') && request()->query('sortBy') == 'bestsaller' ? 'checked' : '' }} />
                         <label class="form-check-label cursor-pointer">
                             پرفروش ترین
                         </label>
                     </div>
-                    <div class="form-check my-2">
-                        <input class="form-check-input" type="radio" name="flexRadioDefault" />
+                    <div @change="filter('sortBy', 'sale')" class="form-check my-2">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" {{ request()->has('sortBy') && request()->query('sortBy') == 'sale' ? 'checked' : '' }} />
                         <label class="form-check-label cursor-pointer">
                             با تخفیف
                         </label>
