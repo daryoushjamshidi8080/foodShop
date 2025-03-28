@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,9 @@ Route::post('/contact', [ContactUsController::class, 'store'])->name('contact.st
 
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/menu', [ProductController::class, 'menu'])->name('product.menu');
+
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.loginForm');
+    Route::post('/', [AuthController::class, 'getPhone'])->name('auth.getPhone');
+});
