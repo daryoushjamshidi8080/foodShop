@@ -91,34 +91,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <script type="text/javascript">
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('filter', () => ({
-                search: '',
-                currentUrl: '{{ url()->current() }}',
-                params: new URLSearchParams(location.search),
-
-
-                filter(type, value) {
-                    this.params.set(type, value);
-                    this.params.delete('page');
-                    document.location.href = this.currentUrl + '?' + this.params.toString();
-                },
-
-                removeFliter(type) {
-                    this.params.delete(type);
-                    this.params.delete('page')
-                    document.location.href = this.currentUrl + '?' + this.params.toString();
-                },
-
-            }))
-        });
-
-        jalaliDatepicker.startWatch({
-            time: true
-        });
-    </script>
     @yield('script')
     </body>
 

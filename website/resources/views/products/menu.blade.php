@@ -3,23 +3,27 @@
 
 @section('script')
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-@endsection
 
-@section('script')
 <script type="text/javascript">
     document.addEventListener('alpine:init', () => {
-        Alpine.data('imageViewer', () => ({
-            imageUrl: '',
+        Alpine.data('filter', () => ({
+            search: '',
+            currentUrl: '{{ url()->current() }}',
+            params: new URLSearchParams(location.search),
 
-            fileChosen(event) {
-                if (event.target.files.length == 0) return;
 
-                let file = event.target.files[0];
-                let reader = new FileReader()
+            filter(type, value) {
+                this.params.set(type, value);
+                this.params.delete('page');
+                document.location.href = this.currentUrl + '?' + this.params.toString();
+            },
 
-                reader.readAsDataURL(file)
-                reader.onload = e => this.imageUrl = e.target.result
-            }
+            removeFliter(type) {
+                this.params.delete(type);
+                this.params.delete('page')
+                document.location.href = this.currentUrl + '?' + this.params.toString();
+            },
+
         }))
     });
 

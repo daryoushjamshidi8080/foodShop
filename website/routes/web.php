@@ -31,7 +31,5 @@ Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name
 Route::get('/menu', [ProductController::class, 'menu'])->name('product.menu');
 
 
-Route::group(['prefix' => 'auth'], function () {
-    Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.loginForm');
-    Route::post('/', [AuthController::class, 'getPhone'])->name('auth.getPhone');
-});
+Route::get('/loginForm', [AuthController::class, 'loginForm'])->name('auth.loginForm');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
