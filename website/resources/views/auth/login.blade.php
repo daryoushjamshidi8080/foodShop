@@ -1,10 +1,6 @@
 @extends('layout.master')
 
 
-@section('link')
-<meta name="csrf-token" content="{{ csrf_token() }}">
-
-@endsection
 @section('title', 'ورود')
 @section('script')
 <script script script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js">
@@ -17,11 +13,13 @@
         Alpine.data('loginForm', () => ({
             cellphone: '',
             error: '',
+            loginToken: '',
             loading: false,
+            checkOtpForm: false,
 
             async login() {
                 this.loading = true;
-                await sleep(1000)
+                // await sleep(1000)
                 console.log('hi');
                 const res = await fetch('http://127.0.0.1:8000/login', {
                     method: 'POST',
@@ -37,11 +35,16 @@
                 const data = await res.json();
                 this.loading = false;
                 if (res.ok) {
+                    this.checkOtpForm = true;
+                    console.log(data)
                     this.error = ' '
-                    console.log(data);
+                    this.loginToken = data.loginToken;
+
 
                 } else {
-                    this.error = data.message;
+                    console.log(data)
+                    console.log('my error')
+                    this.error = data.error;
                 }
             }
         }))
@@ -57,26 +60,63 @@
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-4 offset-md-4">
-                <div class="card" x-data="loginForm">
+                <div x-data="loginForm" class="card">
                     <div class="card-body">
                         <div class="form_container">
-                            <div>
-                                <div class="mb-3">
-                                    <label class="form-label">شماره موبایل</label>
-                                    <input x-model="cellphone" name="phone" type="text" class="form-control mb-2" />
-                                    <div class="form-text text-danger" x-text='error'> </div>
+
+                            {{-- cellphone input --}}
+                            <template x-if="!checkOtpForm">
+                                <div>
+                                    <div class="mb-3">
+                                        <label class="form-label">شماره موبایل</label>
+                                        <input type="text" x-model="cellphone" class="form-control mb-2" />
+                                        <div class="form-text text-danger" x-text="error"></div>
+                                    </div>
+                                    <button @click="login()" type="submit" class="btn btn-primary btn-auth">ورود
+                                        <div x-show="loading" class="spinner-border spinner-border-sm ms-2"></div>
+                                    </button>
                                 </div>
-                                <button @click="login()" type="submit" class="btn btn-primary btn-auth">
-                                    ورود
-                                    <div x-show="loading" class="spinner-border spinner-border-sm ms-2"></div>
-                                </button>
-                                </d>
-                            </div>
+                            </template>
+
+                            {{-- otp input --}}
+                            <template x-if="checkOtpForm">
+                                <div>
+                                    <div class="mb-3">
+                                        <label class="form-label">کد ورود</label>
+                                        <input type="text" x-model="otp" class="form-control mb-2" />
+                                        <div class="form-text text-danger" x-text="error"></div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-baseline">
+                                        <button @click="checkOtp()" type="submit"
+                                            class="btn btn-primary btn-auth">ارسال
+                                            <div x-show="loading" class="spinner-border spinner-border-sm ms-2"></div>
+                                        </button>
+
+                                        <template x-if="seconds > 0 || minutes > 0">
+                                            <div class="mb-1 me-3">
+                                                <span x-text="seconds < 10 ? `0${seconds}` : seconds"></span>:
+                                                <span x-text="minutes < 10 ? `0${minutes}` : minutes"></span>
+                                            </div>
+                                        </template>
+
+                                        <template x-if="seconds == 0 && minutes == 0">
+                                            <button @click="resendOtp" type="submit" class="btn btn-dark">ارسال دوباره
+                                                <div x-show="loadingResend"
+                                                    class="spinner-border spinner-border-sm ms-2"></div>
+                                            </button>
+                                        </template>
+                                    </div>
+
+                                </div>
+                            </template>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
 <!-- end login section -->
 @endsection
