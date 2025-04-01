@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,4 +37,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
     Route::post('/check-otp', [AuthController::class, 'checkOtp'])->name('auth.checkOtp');
     Route::post('/resend-otp', [AuthController::class, 'resendOtp'])->name('auth.resendOtp');
+});
+
+
+Route::prefix('profile')->middleware('auth')->group(function () {
+    Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
 });
