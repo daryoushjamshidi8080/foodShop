@@ -43,7 +43,7 @@
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav mx-auto">
                                 <li class="nav-item {{ request()->is('/') ? 'active' : '' }}">
-                                    <a class="nav-link" href="{{ route('home') }}">صفحه اصلی</a>
+                                    <a class="nav-link" href="{{ route('home.index') }}">صفحه اصلی</a>
                                 </li>
                                 <li class="nav-item {{ request()->is('menu') ? 'active' : '' }}">
                                     <a class="nav-link" href="{{ route('product.menu') }}">منو</a>
@@ -62,9 +62,17 @@
                                         3
                                     </span>
                                 </a>
+                                @auth
                                 <a href="login.html" class="btn-auth">
+                                    پروفایل
+                                </a>
+                                @endauth
+
+                                @guest
+                                <a href="{{ route(auth.loginForm) }}" class="btn-auth">
                                     ورود
                                 </a>
+                                @endguest
                             </div>
                         </div>
                     </nav>

@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home.index');
-})->name('home');
+})->name('home.index');
 
 
 Route::get('/about', function () {
@@ -31,5 +31,9 @@ Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name
 Route::get('/menu', [ProductController::class, 'menu'])->name('product.menu');
 
 
-Route::get('/loginForm', [AuthController::class, 'loginForm'])->name('auth.loginForm');
-Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+Route::middleware('guest')->group(function () {
+    Route::get('/loginForm', [AuthController::class, 'loginForm'])->name('auth.loginForm');
+    Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/check-otp', [AuthController::class, 'checkOtp'])->name('auth.checkOtp');
+    Route::post('/resend-otp', [AuthController::class, 'resendOtp'])->name('auth.resendOtp');
+});
