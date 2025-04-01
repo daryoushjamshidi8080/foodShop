@@ -27,4 +27,4 @@
 1. ابتدا پروژه را کلون کنید:
 
 ```bash
-git clone <repository-url>
+git clone <https://github.com/daryoushjamshidi8080/foodShop.git>
