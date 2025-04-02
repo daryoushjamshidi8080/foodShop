@@ -25,6 +25,8 @@
 ## نصب و راه‌اندازی
 
 1. ابتدا پروژه را کلون کنید:
+2. پکیج ها را نصب کنید
 
 ```bash
 git clone <https://github.com/daryoushjamshidi8080/foodShop.git>
+```
