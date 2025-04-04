@@ -19,7 +19,8 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // dd($request->all());
+
+        \Log::info('login info user', ['message' => $request]);
         try {
             logger()->info('Login Request Data:', $request->all());
             $request->validate([

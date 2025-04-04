@@ -43,3 +43,8 @@ Route::middleware('guest')->group(function () {
 Route::prefix('profile')->middleware('auth')->group(function () {
     Route::get('/', [ProfileController::class, 'index'])->name('profile.index');
 });
+
+
+Route::get('/test', function () {
+    return "Daryoush";
+})->middleware('auth');

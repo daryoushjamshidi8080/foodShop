@@ -69,7 +69,7 @@
                                 @endauth
 
                                 @guest
-                                <a href="{{ route(auth.loginForm) }}" class="btn-auth">
+                                <a href="{{ route('auth.loginForm') }}" class="btn-auth">
                                     ورود
                                 </a>
                                 @endguest
