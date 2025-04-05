@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
         $middleware->redirectGuestsTo('/loginForm');
+        $middleware->redirectUsersTo('/profile');
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
